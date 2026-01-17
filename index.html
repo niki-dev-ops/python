@@ -1,518 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Python Code Library</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Notebook Library</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-      }
-
-      .container {
-        max-width: 1400px;
-        margin: 0 auto;
-        background: white;
-        min-height: 100vh;
-      }
-
-      .header {
-        background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-        color: white;
-        padding: 30px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .header h1 {
-        font-size: 2em;
-        margin-bottom: 10px;
-      }
-
-      .header p {
-        opacity: 0.8;
-      }
-
-      .content-wrapper {
-        display: flex;
-        min-height: calc(100vh - 120px);
-      }
-
-      .sidebar {
-        width: 280px;
-        background: #f7fafc;
-        border-right: 2px solid #e2e8f0;
-        padding: 20px;
-      }
-
-      .nav-title {
-        font-size: 0.9em;
-        color: #718096;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-        font-weight: 600;
-      }
-
-      .nav-link {
-        display: block;
-        padding: 12px 16px;
-        color: #2d3748;
-        text-decoration: none;
-        border-radius: 6px;
-        margin-bottom: 8px;
-        transition: all 0.2s ease;
-        font-weight: 500;
-      }
-
-      .nav-link:hover {
-        background: #e2e8f0;
-        transform: translateX(5px);
-      }
-
-      .nav-link.active {
-        background: #667eea;
-        color: white;
-      }
-
-      .main-content {
-        flex: 1;
-        padding: 40px;
-        overflow-y: auto;
-      }
-
-      .page {
-        display: none;
-      }
-
-      .page.active {
-        display: block;
-        animation: fadeIn 0.3s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
-      }
 
-      .page-title {
-        font-size: 2em;
-        color: #2d3748;
-        margin-bottom: 10px;
-        padding-bottom: 15px;
-        border-bottom: 3px solid #667eea;
-      }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
 
-      .page-description {
-        color: #718096;
-        margin-bottom: 30px;
-        font-size: 1.1em;
-      }
+        .header {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-      .code-block {
-        background: #1e1e1e;
-        border-radius: 8px;
-        padding: 25px;
-        overflow-x: auto;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
 
-      pre {
-        margin: 0;
-        font-family: "Courier New", monospace;
-        font-size: 14px;
-        line-height: 1.8;
-        color: #d4d4d4;
-      }
+        .header p {
+            opacity: 0.8;
+        }
 
-      @media (max-width: 768px) {
         .content-wrapper {
-          flex-direction: column;
+            display: flex;
+            min-height: calc(100vh - 120px);
         }
 
         .sidebar {
-          width: 100%;
-          border-right: none;
-          border-bottom: 2px solid #e2e8f0;
+            width: 280px;
+            background: #f7fafc;
+            border-right: 2px solid #e2e8f0;
+            padding: 20px;
+        }
+
+        .nav-title {
+            font-size: 0.9em;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 16px;
+            color: #2d3748;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: #e2e8f0;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: #667eea;
+            color: white;
         }
 
         .main-content {
-          padding: 20px;
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
         }
-      }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-size: 2em;
+            color: #2d3748;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .upload-area {
+            background: #f7fafc;
+            border: 3px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+        }
+
+        .upload-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .upload-text {
+            font-size: 1.2em;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .upload-subtext {
+            color: #718096;
+            margin-bottom: 25px;
+        }
+
+        .upload-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+        }
+
+        .upload-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Notebook styling */
+        .notebook-container {
+            background: #fafafa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .notebook-cell {
+            background: white;
+            margin-bottom: 1px;
+            border-left: 3px solid transparent;
+        }
+
+        .notebook-cell.code-cell {
+            border-left-color: #3b82f6;
+        }
+
+        .notebook-cell.markdown-cell {
+            border-left-color: #10b981;
+        }
+
+        .cell-input {
+            padding: 15px 20px;
+            background: #f8f9fa;
+        }
+
+        .cell-label {
+            color: #718096;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .cell-code {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .cell-output {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .output-label {
+            color: #e53e3e;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .output-content {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .markdown-content {
+            padding: 15px 20px;
+            line-height: 1.8;
+        }
+
+        .markdown-content h1 { font-size: 2em; margin: 20px 0 10px; }
+        .markdown-content h2 { font-size: 1.5em; margin: 18px 0 10px; }
+        .markdown-content h3 { font-size: 1.25em; margin: 16px 0 8px; }
+        .markdown-content p { margin: 10px 0; }
+        .markdown-content code { 
+            background: #f0f0f0; 
+            padding: 2px 6px; 
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .markdown-content pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .clear-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: #c53030;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #e2e8f0;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="header">
-        <h1>📚 Python Code Library</h1>
-        <p>Browse and explore Python code examples</p>
-      </div>
-
-      <div class="content-wrapper">
-        <nav class="sidebar">
-          <div class="nav-title">Code Examples</div>
-          <a href="#" class="nav-link active" data-page="0">Hello World</a>
-          <a href="#" class="nav-link" data-page="1">Calculator</a>
-          <a href="#" class="nav-link" data-page="2">List Operations</a>
-          <a href="#" class="nav-link" data-page="3">Dictionary Demo</a>
-          <a href="#" class="nav-link" data-page="4">File Handling</a>
-          <a href="#" class="nav-link" data-page="5">Class Example</a>
-          <a href="#" class="nav-link" data-page="6">Web Scraper</a>
-          <a href="#" class="nav-link" data-page="7">Data Analysis</a>
-          <a href="#" class="nav-link" data-page="8">API Request</a>
-          <a href="#" class="nav-link" data-page="9">Game Loop</a>
-        </nav>
-
-        <main class="main-content" id="mainContent">
-          <!-- Pages will be dynamically loaded here -->
-        </main>
-      </div>
+        <div class="header">
+            <h1>📚 Python Notebook Library</h1>
+            <p>Upload and view your Jupyter notebooks</p>
+        </div>
+        
+        <div class="content-wrapper">
+            <nav class="sidebar">
+                <div class="nav-title">Notebook Slots</div>
+                <a href="#" class="nav-link active" data-page="0">Slot 1</a>
+                <a href="#" class="nav-link" data-page="1">Slot 2</a>
+                <a href="#" class="nav-link" data-page="2">Slot 3</a>
+                <a href="#" class="nav-link" data-page="3">Slot 4</a>
+                <a href="#" class="nav-link" data-page="4">Slot 5</a>
+                <a href="#" class="nav-link" data-page="5">Slot 6</a>
+                <a href="#" class="nav-link" data-page="6">Slot 7</a>
+                <a href="#" class="nav-link" data-page="7">Slot 8</a>
+                <a href="#" class="nav-link" data-page="8">Slot 9</a>
+                <a href="#" class="nav-link" data-page="9">Slot 10</a>
+            </nav>
+            
+            <main class="main-content" id="mainContent"></main>
+        </div>
     </div>
 
     <script>
-      const codeExamples = [
-        {
-          name: "Hello World",
-          description:
-            "A simple introduction to Python with basic print statements and string formatting.",
-          code: `# Simple Hello World Program
-print("Hello, World!")
+        const slots = Array(10).fill(null);
+        let activeSlot = 0;
 
-# Print with variables
-name = "Python"
-print(f"Hello from {name}!")
+        const mainContent = document.getElementById('mainContent');
+        const navLinks = document.querySelectorAll('.nav-link');
 
-# Multiple prints
-for i in range(3):
-    print(f"Hello #{i+1}")`,
-        },
-        {
-          name: "Calculator",
-          description:
-            "A basic calculator with addition, subtraction, multiplication, and division functions.",
-          code: `# Simple Calculator
-def add(x, y):
-    return x + y
+        function init() {
+            // Create pages for all slots
+            for (let i = 0; i < 10; i++) {
+                const page = document.createElement('div');
+                page.className = `page ${i === 0 ? 'active' : ''}`;
+                page.id = `page-${i}`;
+                page.innerHTML = renderSlot(i);
+                mainContent.appendChild(page);
+            }
 
-def subtract(x, y):
-    return x - y
+            // Add navigation listeners
+            navLinks.forEach((link, index) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage(index);
+                });
+            });
+        }
 
-def multiply(x, y):
-    return x * y
+        function renderSlot(index) {
+            if (slots[index]) {
+                return `
+                    <h1 class="page-title">${slots[index].name}</h1>
+                    <div class="notebook-container">
+                        ${renderNotebook(slots[index].data)}
+                    </div>
+                    <button class="clear-btn" onclick="clearSlot(${index})">Clear Notebook</button>
+                `;
+            } else {
+                return `
+                    <h1 class="page-title">Slot ${index + 1}</h1>
+                    <div class="upload-area">
+                        <div class="upload-icon">📓</div>
+                        <div class="upload-text">Upload Jupyter Notebook</div>
+                        <div class="upload-subtext">Select an .ipynb file to display here</div>
+                        <button class="upload-btn" onclick="triggerUpload(${index})">
+                            Choose File
+                        </button>
+                        <input type="file" class="file-input" id="file-${index}" accept=".ipynb" onchange="handleFileUpload(${index}, event)">
+                    </div>
+                `;
+            }
+        }
 
-def divide(x, y):
-    if y != 0:
-        return x / y
-    return "Cannot divide by zero"
+        function triggerUpload(index) {
+            document.getElementById(`file-${index}`).click();
+        }
 
-# Example usage
-num1 = 10
-num2 = 5
-print(f"Sum: {add(num1, num2)}")
-print(f"Difference: {subtract(num1, num2)}")
-print(f"Product: {multiply(num1, num2)}")
-print(f"Quotient: {divide(num1, num2)}")`,
-        },
-        {
-          name: "List Operations",
-          description:
-            "Comprehensive examples of working with Python lists, including manipulation and comprehensions.",
-          code: `# Working with Lists
-fruits = ["apple", "banana", "cherry", "date"]
+        async function handleFileUpload(index, event) {
+            const file = event.target.files[0];
+            if (!file) return;
 
-# Accessing elements
-print(f"First fruit: {fruits[0]}")
-print(f"Last fruit: {fruits[-1]}")
+            try {
+                const text = await file.text();
+                const notebook = JSON.parse(text);
+                
+                slots[index] = {
+                    name: file.name.replace('.ipynb', ''),
+                    data: notebook
+                };
 
-# Adding elements
-fruits.append("elderberry")
-fruits.insert(1, "apricot")
+                updateSlot(index);
+                updateNavLabel(index, slots[index].name);
+            } catch (error) {
+                alert(`Error loading notebook: ${error.message}`);
+            }
+        }
 
-# Removing elements
-fruits.remove("banana")
-popped = fruits.pop()
+        function clearSlot(index) {
+            slots[index] = null;
+            updateSlot(index);
+            updateNavLabel(index, `Slot ${index + 1}`);
+        }
 
-# List comprehension
-squares = [x**2 for x in range(10)]
-print(f"Squares: {squares}")
+        function updateSlot(index) {
+            const page = document.getElementById(`page-${index}`);
+            page.innerHTML = renderSlot(index);
+        }
 
-# Filtering
-even_squares = [x for x in squares if x % 2 == 0]
-print(f"Even squares: {even_squares}")`,
-        },
-        {
-          name: "Dictionary Demo",
-          description:
-            "Learn how to work with dictionaries in Python, including creation, access, and iteration.",
-          code: `# Working with Dictionaries
-student = {
-    "name": "Alice",
-    "age": 20,
-    "grades": [85, 90, 88, 92],
-    "major": "Computer Science"
-}
+        function updateNavLabel(index, name) {
+            navLinks[index].textContent = name;
+        }
 
-# Accessing values
-print(f"Name: {student['name']}")
-print(f"Age: {student.get('age')}")
-
-# Adding new key-value pairs
-student["gpa"] = 3.8
-student["year"] = "Junior"
-
-# Iterating through dictionary
-for key, value in student.items():
-    print(f"{key}: {value}")
-
-# Dictionary comprehension
-squared_dict = {x: x**2 for x in range(5)}
-print(squared_dict)`,
-        },
-        {
-          name: "File Handling",
-          description:
-            "Examples of reading from and writing to files using Python's built-in file operations.",
-          code: `# File Operations
-import os
-
-# Writing to a file
-with open("example.txt", "w") as file:
-    file.write("Hello, File!\\n")
-    file.write("This is a new line.\\n")
-    lines = ["Line 1\\n", "Line 2\\n", "Line 3\\n"]
-    file.writelines(lines)
-
-# Reading from a file
-with open("example.txt", "r") as file:
-    content = file.read()
-    print(content)
-
-# Reading line by line
-with open("example.txt", "r") as file:
-    for line in file:
-        print(line.strip())
-
-# Appending to a file
-with open("example.txt", "a") as file:
-    file.write("Appended line\\n")`,
-        },
-        {
-          name: "Class Example",
-          description:
-            "Object-oriented programming in Python with a Dog class demonstrating initialization, methods, and special methods.",
-          code: `# Object-Oriented Programming
-class Dog:
-    def __init__(self, name, breed, age):
-        self.name = name
-        self.breed = breed
-        self.age = age
-    
-    def bark(self):
-        return f"{self.name} says Woof!"
-    
-    def birthday(self):
-        self.age += 1
-        return f"Happy birthday {self.name}! Now {self.age} years old."
-    
-    def __str__(self):
-        return f"{self.name} is a {self.age} year old {self.breed}"
-
-# Creating instances
-dog1 = Dog("Max", "Golden Retriever", 3)
-dog2 = Dog("Bella", "Poodle", 5)
-
-print(dog1)
-print(dog1.bark())
-print(dog1.birthday())`,
-        },
-        {
-          name: "Web Scraper",
-          description:
-            "A simple web scraper using requests and BeautifulSoup to extract data from websites.",
-          code: `# Simple Web Scraper (requires requests and BeautifulSoup)
-import requests
-from bs4 import BeautifulSoup
-
-def scrape_titles(url):
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        titles = soup.find_all('h1')
-        
-        for idx, title in enumerate(titles, 1):
-            print(f"{idx}. {title.get_text().strip()}")
-    
-    except requests.RequestException as e:
-        print(f"Error: {e}")
-
-# Example usage
-# scrape_titles("https://example.com")`,
-        },
-        {
-          name: "Data Analysis",
-          description:
-            "Data analysis with Pandas, demonstrating DataFrame creation, filtering, and aggregation operations.",
-          code: `# Data Analysis with Pandas
-import pandas as pd
-import numpy as np
-
-# Creating a DataFrame
-data = {
-    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
-    'Age': [25, 30, 35, 28, 32],
-    'Salary': [50000, 60000, 75000, 55000, 70000],
-    'Department': ['HR', 'IT', 'Finance', 'IT', 'HR']
-}
-
-df = pd.DataFrame(data)
-
-# Basic statistics
-print(df.describe())
-
-# Filtering data
-it_employees = df[df['Department'] == 'IT']
-print(it_employees)
-
-# Grouping and aggregation
-avg_salary = df.groupby('Department')['Salary'].mean()
-print(avg_salary)
-
-# Adding new column
-df['Bonus'] = df['Salary'] * 0.1`,
-        },
-        {
-          name: "API Request",
-          description:
-            "Making HTTP requests to REST APIs using the requests library, with GET and POST examples.",
-          code: `# Making API Requests
-import requests
-import json
-
-def get_user_data(user_id):
-    url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
-    
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        
-        user = response.json()
-        
-        print(f"Name: {user['name']}")
-        print(f"Email: {user['email']}")
-        print(f"City: {user['address']['city']}")
-        
-        return user
-    
-    except requests.RequestException as e:
-        print(f"Error fetching data: {e}")
-        return None
-
-# Post request example
-def create_post(title, body):
-    url = "https://jsonplaceholder.typicode.com/posts"
-    
-    data = {
-        'title': title,
-        'body': body,
-        'userId': 1
-    }
-    
-    response = requests.post(url, json=data)
-    return response.json()`,
-        },
-        {
-          name: "Game Loop",
-          description:
-            "A complete number guessing game demonstrating loops, conditionals, and user input handling.",
-          code: `# Simple Number Guessing Game
-import random
-
-def guessing_game():
-    secret_number = random.randint(1, 100)
-    attempts = 0
-    max_attempts = 10
-    
-    print("Welcome to the Number Guessing Game!")
-    print(f"I'm thinking of a number between 1 and 100.")
-    print(f"You have {max_attempts} attempts to guess it.\\n")
-    
-    while attempts < max_attempts:
-        try:
-            guess = int(input(f"Attempt {attempts + 1}: Enter your guess: "))
-            attempts += 1
+        function showPage(index) {
+            activeSlot = index;
             
-            if guess < secret_number:
-                print("Too low! Try again.\\n")
-            elif guess > secret_number:
-                print("Too high! Try again.\\n")
-            else:
-                print(f"Congratulations! You guessed it in {attempts} attempts!")
-                return
-        
-        except ValueError:
-            print("Please enter a valid number!\\n")
-    
-    print(f"Game Over! The number was {secret_number}")
+            navLinks.forEach((link, i) => {
+                link.classList.toggle('active', i === index);
+            });
+            
+            document.querySelectorAll('.page').forEach((page, i) => {
+                page.classList.toggle('active', i === index);
+            });
+            
+            mainContent.scrollTop = 0;
+        }
 
-# guessing_game()`,
-        },
-      ];
+        function renderNotebook(notebook) {
+            const cells = notebook.cells || [];
+            let html = '';
+            let codeIndex = 0;
+            
+            cells.forEach(cell => {
+                if (cell.cell_type === 'code') {
+                    codeIndex++;
+                    html += renderCodeCell(cell, codeIndex);
+                } else if (cell.cell_type === 'markdown') {
+                    html += renderMarkdownCell(cell);
+                }
+            });
+            
+            return html;
+        }
 
-      const mainContent = document.getElementById("mainContent");
-      const navLinks = document.querySelectorAll(".nav-link");
+        function renderCodeCell(cell, index) {
+            const source = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+            const outputs = cell.outputs || [];
+            
+            let html = '<div class="notebook-cell code-cell">';
+            html += '<div class="cell-input">';
+            html += `<div class="cell-label">In [${index}]:</div>`;
+            html += `<div class="cell-code">${escapeHtml(source)}</div>`;
+            html += '</div>';
+            
+            if (outputs.length > 0) {
+                html += '<div class="cell-output">';
+                html += `<div class="output-label">Out [${index}]:</div>`;
+                
+                outputs.forEach(output => {
+                    if (output.output_type === 'stream') {
+                        const text = Array.isArray(output.text) ? output.text.join('') : output.text;
+                        html += `<div class="output-content">${escapeHtml(text)}</div>`;
+                    } else if (output.output_type === 'execute_result' || output.output_type === 'display_data') {
+                        if (output.data) {
+                            if (output.data['text/plain']) {
+                                const text = Array.isArray(output.data['text/plain']) 
+                                    ? output.data['text/plain'].join('') 
+                                    : output.data['text/plain'];
+                                html += `<div class="output-content">${escapeHtml(text)}</div>`;
+                            }
+                            if (output.data['text/html']) {
+                                const htmlContent = Array.isArray(output.data['text/html']) 
+                                    ? output.data['text/html'].join('') 
+                                    : output.data['text/html'];
+                                html += `<div class="output-content">${htmlContent}</div>`;
+                            }
+                        }
+                    } else if (output.output_type === 'error') {
+                        const errorText = output.traceback ? output.traceback.join('\n') : 
+                                        `${output.ename}: ${output.evalue}`;
+                        html += `<div class="error-message">${escapeHtml(errorText)}</div>`;
+                    }
+                });
+                
+                html += '</div>';
+            }
+            
+            html += '</div>';
+            return html;
+        }
 
-      // Create all pages
-      codeExamples.forEach((example, index) => {
-        const page = document.createElement("div");
-        page.className = `page ${index === 0 ? "active" : ""}`;
-        page.id = `page-${index}`;
-        page.innerHTML = `
-                <h1 class="page-title">${example.name}</h1>
-                <p class="page-description">${example.description}</p>
-                <div class="code-block">
-                    <pre>${example.code}</pre>
-                </div>
-            `;
-        mainContent.appendChild(page);
-      });
+        function renderMarkdownCell(cell) {
+            const source = Array.isArray(cell.source) ? cell.source.join('') : cell.source;
+            
+            let html = '<div class="notebook-cell markdown-cell">';
+            html += '<div class="markdown-content">';
+            html += parseMarkdown(source);
+            html += '</div>';
+            html += '</div>';
+            return html;
+        }
 
-      // Navigation functionality
-      navLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          const pageIndex = link.getAttribute("data-page");
+        function parseMarkdown(text) {
+            let html = text;
+            
+            html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            html = html.replace(/```([\s\S]*?)```/g, '<pre>$1</pre>');
+            html = html.split('\n\n').map(p => {
+                p = p.trim();
+                if (!p) return '';
+                if (p.startsWith('<h') || p.startsWith('<pre')) return p;
+                return `<p>${p}</p>`;
+            }).join('');
+            
+            return html;
+        }
 
-          // Remove active class from all links and pages
-          navLinks.forEach((l) => l.classList.remove("active"));
-          document
-            .querySelectorAll(".page")
-            .forEach((p) => p.classList.remove("active"));
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
-          // Add active class to clicked link and corresponding page
-          link.classList.add("active");
-          document.getElementById(`page-${pageIndex}`).classList.add("active");
-
-          // Scroll to top
-          mainContent.scrollTop = 0;
-        });
-      });
+        init();
     </script>
-  </body>
+</body>
 </html>
